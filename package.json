@@ -1,0 +1,36 @@
+{
+  "name": "mqtt-crea-server",
+  "version": "1.0.0",
+  "description": "A broker for CREA using mcollina/mosca project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "clean-install": "rm -Rf node_modules && npm i && npm dedupe",
+    "lint": "eslint --fix .",
+    "lint:fix": "eslint . --fix",
+    "test": "npm run coverage",
+    "pretest": "npm run lint",
+    "prehealth": "npm run clean-install",
+    "health": "npm run coverage-all",
+    "posthealth": "npm-check",
+    "coverage": "NODE_ENV=test istanbul cover _mocha",
+    "coverage-all": "NODE_ENV=test istanbul --include-all-sources cover _mocha",
+    "postcoverage": "istanbul check-coverage --branch 80 --statement 90"
+  },
+  "author": "Oscar Leche <oscar.leche@gmail.com>",
+  "license": "GPL",
+  "dependencies": {
+    "express": "~4.14.0",
+    "mosca": "^2.1.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^3.5.0",
+    "eslint-config-xoom": "^4.0.0",
+    "istanbul": "^0.4.3",
+    "mocha": "^3.0.2",
+    "nock": "^8.0.0",
+    "sinon": "^1.17.4",
+    "sinon-as-promised": "~4.0.0"
+  }
+}
