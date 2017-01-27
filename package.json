@@ -21,7 +21,8 @@
   "license": "GPL",
   "dependencies": {
     "express": "~4.14.0",
-    "mosca": "^2.1.0"
+    "mosca": "^2.1.0",
+    "winston": "^2.3.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",

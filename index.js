@@ -1,16 +1,17 @@
+const winston = require('winston');
 const express = require('express');
 const mosca = require('mosca');
 
 var pubsubsettings = {
   type: 'redis',
-  port: 6380,
+  port: 6379,
   host: 'localhost',
   return_buffers: true
 };
 
 var persistencesettings = {
   factory: mosca.persistence.Redis,
-  port: 6380,
+  port: 6379,
   host: 'localhost'
 };
 
@@ -20,10 +21,18 @@ var moscaSettings = {
   persistence: persistencesettings
 };
 
-var server = new mosca.Server(moscaSettings);   //here we start mosca
-server.on('ready', setup);  //on init it fires up setup()
+var server = new mosca.Server(moscaSettings);
+server.on('ready', setup);
 
-// fired when the mqtt server is ready
+server.on('clientConnected', function(client) {
+    console.log('client connected', client.id);
+});
+
+server.on('published', function(packet, client) {
+  console.log('Published', packet.payload);
+});
+
 function setup() {
-  console.log('Mosca server is up and running')
+  console.log('CREA-Mosca server is up and running')
 }
+console.log(process.pid);
